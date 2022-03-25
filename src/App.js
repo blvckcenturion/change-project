@@ -1,33 +1,58 @@
 import './styles/globals.scss'
 import 'normalize.css'
 import Header from './components/Header';
+import { Routes, Route } from 'react-router-dom';
 
 const App = () =>{
   return (
     <div className="App">
       <Header />
-      <h1>a</h1>
-      <h1>a</h1>
-      <h1>a</h1>
-      <h1>a</h1>
-      <h1>a</h1><h1>a</h1>
-
-      <h1>a</h1>
-      <h1>a</h1>
-      <h1>a</h1>
-      <h1>a</h1>
-      <h1>a</h1>
-
-      <h1>a</h1>
-      <h1>a</h1>
-      <h1>a</h1>
-      <h1>a</h1>
-      <h1>a</h1>
-
-      <h1>a</h1>
-      <h1>a</h1>
+      <Routes>
+          <Route index element={<HomePage />} />
+          <Route path="hola" element={<HolaPage />} />
+      </Routes>
     </div>
   );
+}
+
+const HomePage = () => {
+  return (
+    <>
+      <h1>Hola mundo</h1>
+      <h1>Hola mundo</h1>
+      <h1>Hola mundo</h1>
+      <h1>Hola mundo</h1>
+      <h1>Hola mundo</h1><h1>Hola mundo</h1>
+      <h1>Hola mundo</h1>
+      <h1>Hola mundo</h1>
+      <h1>Hola mundo</h1>
+      <h1>Hola mundo</h1>
+      <h1>Hola mundo</h1>
+    </>
+  )
+}
+
+const HolaPage = () => {
+  return (
+    <>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+      <h1>Hola </h1>
+
+      <h1>Hola </h1><h1>Hola </h1>
+      <h1>Hola </h1>
+
+    </>
+  )
 }
 
 export default App;
