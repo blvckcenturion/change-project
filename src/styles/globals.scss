@@ -1,0 +1,21 @@
+@import './index.scss';
+
+@font-face {
+    font-family: "SfProDisplay";
+    src: url("../assets/fonts/SfProDisplay.OTF") format("opentype");
+}
+
+@font-face {
+    font-family: "MonumentExtended";
+    src: url("../assets/fonts/MonumentExtended.otf") format("opentype");
+}
+
+body {
+    background-color: $background-color;
+}
+
+h1, h2 {
+    font-family: $primary-font;
+    color: $primary-color;
+}
+
