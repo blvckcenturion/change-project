@@ -4,6 +4,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import socials from '../utils/socials'
 import {Link, NavLink, useNavigate, useLocation} from 'react-router-dom'
+import Social from './Social';
+import { use100vh } from 'react-div-100vh'
 
 const Header = () => {
     let navigate = useNavigate();
@@ -16,7 +18,7 @@ const Header = () => {
 
     const navigateToHomePage = (e) => {
         setIsOpen(false)
-        pathname !== '/' ? navigate('/') : console.log('sapo');
+        pathname !== '/' && navigate('/');
     }
 
     return (
@@ -37,7 +39,7 @@ const Header = () => {
 
 const Navigation = ({onClickIcon}) => {
     return (
-        <nav className="navigation">
+        <nav className="navigation" style={{height: use100vh()}}>
             <div>
                 <NavLink to="/hola" onClick={onClickIcon}>MY PROFILE</NavLink>
                 <NavLink to="/hola" onClick ={onClickIcon}>START A NEW PETITION</NavLink>
@@ -50,13 +52,6 @@ const Navigation = ({onClickIcon}) => {
     )
 }
 
-const Social = ({link, icon}) => {
-    return (
-        <a href={link} target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={icon} className="icon" />
-        </a>
-    )
-}
 
 
 export default Header

@@ -1,8 +1,8 @@
-import { faFacebookF, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons"
+import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons"
 
 const socials = [
     {
-        icon: faFacebookF,
+        icon: faFacebook,
         link: "https://www.facebook.com/",
     },
     {

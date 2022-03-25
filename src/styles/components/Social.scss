@@ -1,0 +1,21 @@
+.social {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    :hover{
+        color: $secondary-color;
+        transition: .5s;
+    }
+    svg {
+        width: 30%;
+        height: 30%;
+        color: $primary-color;
+        @include md{
+            width: 20%;
+            height: 20%;
+        }
+    }
+}

@@ -2,15 +2,19 @@ import './styles/globals.scss'
 import 'normalize.css'
 import Header from './components/Header';
 import { Routes, Route } from 'react-router-dom';
+import Footer from './components/Footer';
 
 const App = () =>{
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-          <Route index element={<HomePage />} />
-          <Route path="hola" element={<HolaPage />} />
-      </Routes>
+    <div>
+      <Header/>
+        <div className='page-content'>
+          <Routes>
+              <Route index element={<HomePage />} />
+              <Route path="hola" element={<HolaPage />} />
+          </Routes>
+        </div>
+      <Footer/>
     </div>
   );
 }
