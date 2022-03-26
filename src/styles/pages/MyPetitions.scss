@@ -1,0 +1,104 @@
+.my-petitions-page{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    > div:first-child {
+        width: 100%;
+        height: 20vh;
+        @include md{
+            height: 10vh;
+        }
+        margin-top: 5vh;
+        h3{
+            text-align: center;
+            font-size: 1.8rem;
+            
+        }
+        border: {
+            bottom: 2px solid $primary-color;
+        }
+    }
+    > div:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        @include lg{
+            flex-direction: row;
+        }
+        width: 100%;
+        margin: 5vh 0;
+
+        img{
+            width: 100%;
+            padding: 10px 0;
+            border: {
+                top:  2px solid $primary-color;
+                bottom:  2px solid $primary-color;
+            }
+        }
+    }
+}
+
+.petitions-card {
+    width: 100%;
+    @include lg{
+        width: 45%;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid $primary-color;
+    border-radius: 20px;
+
+    &:first-child {
+        margin-bottom: 10vh;
+        @include lg{
+            margin-bottom: 0;
+        }
+    }
+
+    > h3 {
+        text-align: center;
+        font-size: 1.8rem;
+        width: 100%;
+        padding-bottom: 3vh;
+        border-bottom: 2px solid $primary-color;
+    }
+    a {
+        margin-top: 3rem;
+        height: 10%;
+        color: $secondary-color;
+        font-size: 1.5rem;
+    }
+    box-sizing: border-box;
+    padding: 2rem 0;
+}
+
+.petition {
+    color: $secondary-color;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    border-bottom: 2px solid $primary-color;
+    > div:first-child {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    h3{
+        color: $secondary-color;
+    }
+    >div:last-child{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+
+    }
+}

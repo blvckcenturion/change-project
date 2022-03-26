@@ -1,0 +1,10 @@
+.register-page{
+    width: 90%;
+    height: 190vh;
+    @include md{
+        width: 80%;
+    }
+    @include lg{
+        width: 60%;
+    }
+}

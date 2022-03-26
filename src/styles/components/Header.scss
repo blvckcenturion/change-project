@@ -92,7 +92,7 @@
         border: {
             bottom: 2px solid $primary-color;
         }
-        a{
+        h3{
             color: $primary-color;
             font-family: $primary-font;
             font-size: 1.5rem;
@@ -105,6 +105,10 @@
             }
             @include lg{
                 font-size: 2.5rem;
+            }
+            &:hover {
+                transition: 1s;
+                color: $secondary-color;
             }
         }
     }

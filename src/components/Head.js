@@ -1,8 +1,11 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
-const Head = () => {
+const Head = ({title}) => {
   return (
-    <div>Meta</div>
+    <Helmet>
+      <title>{title} | Change</title>
+    </Helmet>
   )
 }
 

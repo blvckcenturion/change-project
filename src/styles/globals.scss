@@ -12,6 +12,8 @@
 
 body {
     background-color: $background-color;
+    font-family: $secondary-font;
+    color: $primary-color;
 }
 
 h1, h2, h3 {
@@ -20,6 +22,87 @@ h1, h2, h3 {
 }
 
 .page-content{
-    min-height: 100vh;
+    min-height: 95vh;
+    margin-top: 10vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+button {
+    background-color: transparent;
+    border: 2px solid $primary-color;
+    @include md {
+        padding: 1.5rem;
+    }
+    padding: .7rem;
+    
+    border-radius: 10px;
+    color: $secondary-color;
+    &:hover{
+        transition: 0.7s;
+        background-color: $primary-color;
+        color: $secondary-color;
+    }
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+    height: 70%;
+    
+    border-radius: 10px;
+    border: 2px solid $primary-color;
+
+    button{
+        width: 80%;
+        margin-top: 1rem;
+        background-color: $primary-color;
+        @include lg {
+            width: 60%;
+        }
+    }
+
+    div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        input{
+            text-align: center;
+            width: 80%;
+            height: 5vh;
+            border: 2px solid $primary-color;
+            color: $secondary-color;
+            background-color: transparent;
+            &:focus{
+                transition: 0.5s;
+                outline: none;
+                border: 2px solid $secondary-color;
+                border-radius: 10px;
+            }
+            margin: {
+                top: 1rem;
+            }
+            @include lg{
+                width: 60%;
+            }
+        }
+        label {
+            font-size: 1.3rem;
+            color: $secondary-color;
+        }
+        
+    }
+    
+}
+
+input:-internal-autofill-selected {
+    background-color: transparent;
+}

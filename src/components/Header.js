@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import socials from '../utils/socials'
-import {Link, NavLink, useNavigate, useLocation} from 'react-router-dom'
+import {useNavigate, useLocation} from 'react-router-dom'
 import Social from './Social';
 import { use100vh } from 'react-div-100vh'
 
@@ -16,15 +16,15 @@ const Header = () => {
         setIsOpen(!isOpen)
     }
 
-    const navigateToHomePage = (e) => {
+    const navigateTo = (path) => {
         setIsOpen(false)
-        pathname !== '/' && navigate('/');
+        pathname !== path && navigate(path);
     }
 
     return (
         <>
             <div className="header">
-                <div onClick={navigateToHomePage}>
+                <div onClick={(e) => navigateTo('/')}>
                     <Logo />
                     <h2>CHANGE PROJECT</h2>  
                 </div>
@@ -32,18 +32,27 @@ const Header = () => {
                     <FontAwesomeIcon icon={faPlus} className="icon" onClick={onClickIcon}/>
                 </div>
             </div>
-            {isOpen && <Navigation onClickIcon={ onClickIcon }/>}
+            {isOpen && <Navigation setIsOpen={setIsOpen}/>}
         </>
     )
 }
 
-const Navigation = ({onClickIcon}) => {
+const Navigation = ({ setIsOpen }) => {
+    let navigate = useNavigate();
+    let { pathname } = useLocation();
+    
+    const navigateTo = (path) => {
+        setIsOpen(false)
+        pathname !== path && navigate(path);
+    }
+
     return (
         <nav className="navigation" style={{height: use100vh()}}>
             <div>
-                <NavLink to="/hola" onClick={onClickIcon}>MY PROFILE</NavLink>
-                <NavLink to="/hola" onClick ={onClickIcon}>START A NEW PETITION</NavLink>
-                <NavLink to="/hola" onClick ={onClickIcon}>EXPLORE PETITIONS</NavLink>
+                <h3 onClick={() => navigateTo('/my-profile')}>MY PROFILE</h3>
+                <h3 onClick ={() => navigateTo('/new-petition')}>START A NEW PETITION</h3>
+                <h3 onClick={() => navigateTo('/explore')}>EXPLORE PETITIONS</h3>
+                <h3 onClick ={() => navigateTo('/register')}>SIGN UP</h3>
             </div>
             <div>
                 {socials.map((social, i) => <Social key={i} link={social.link} icon={social.icon}/>)}
