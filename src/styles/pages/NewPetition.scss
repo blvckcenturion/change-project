@@ -1,0 +1,14 @@
+.new-petition-page{
+    width: 90%;
+    height: 90vh;
+    @include md{
+        width: 80%;
+    }
+    @include lg{
+        width: 60%;
+    }
+    h3 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+}

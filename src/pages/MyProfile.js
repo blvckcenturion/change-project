@@ -17,14 +17,11 @@ const MyProfile = () => {
       </div>
       <div>
         <h3>PERFIL Y PREFERENCIAS</h3>
-        <button onClick={() => navigate('/edit-profile')}>
+        <button onClick={() => navigate('/account-settings')}>
           Editar perfil
         </button>
         <button onClick={() => navigate('/my-petitions')}>
           Mis peticiones
-        </button>
-        <button onClick={() => navigate('/delete-account')}>
-          Eliminar cuenta
         </button>
       </div>
     </div>

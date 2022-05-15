@@ -24,7 +24,6 @@ h1, h2, h3 {
 .page-content{
     min-height: 95vh;
     margin-top: 10vh;
-    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,6 +96,27 @@ form {
         label {
             font-size: 1.3rem;
             color: $secondary-color;
+        }
+
+        textarea {
+            width: 80%;
+            height: 20vh;
+            border: 2px solid $primary-color;
+            color: $secondary-color;
+            background-color: transparent;
+            resize: none;
+            &:focus{
+                transition: 0.5s;
+                outline: none;
+                border: 2px solid $secondary-color;
+                border-radius: 10px;
+            }
+            margin: {
+                top: 1rem;
+            }
+            @include lg{
+                width: 60%;
+            }
         }
         
     }

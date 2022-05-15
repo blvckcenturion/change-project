@@ -2,8 +2,9 @@ import Head from "../components/Head"
 
 const Petition = () => {
   return (
-    <div>
-      <Head title={"Petition"}/>
+    <div className="petition-page">
+      <Head title={"Petition"} />
+      
     </div>
   )
 }
