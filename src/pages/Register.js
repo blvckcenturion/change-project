@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import Head from "../components/Head"
+import axios from "axios";
 
 const Register = () => {
   const [email, setEmail] = useState("")
@@ -9,13 +10,31 @@ const Register = () => {
   const [name, setName] = useState("")
   const [lastName, setLastName] = useState("")
   const [country, setCountry] = useState("")
-  const [city, setCity] = useState("")
   const [birthdate, setBirthdate] = useState("")
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.table({ email, password, name, lastName, country, city, birthdate })
+    const user = {
+      email,
+      name,
+      lastName,
+      password,
+      password_confirmation: repeatPassword,
+      country, 
+      birthdate
+    }
+
+    await axios.post(`http://localhost:8000/api/users/register`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }, 
+      data: user
+    })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
   }
 
   return (
@@ -37,10 +56,6 @@ const Register = () => {
         <div>
           <label htmlFor="country">Country</label>
           <input type="text" name="country" id="country" value={country} onChange={(e) => setCountry(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="city">City</label>
-          <input type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} />
         </div>
         <div>
           <label htmlFor="email">Email</label>

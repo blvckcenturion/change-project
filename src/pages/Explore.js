@@ -2,6 +2,8 @@ import React from 'react'
 import { myPetitions, otherPetitions } from '../utils/dummyData'
 import { Link } from 'react-router-dom'
 import Head from "../components/Head"
+import { useNavigate } from 'react-router-dom'
+
 const Explore = () => {
 
   const allPetitions = [...myPetitions, ...otherPetitions];
@@ -18,7 +20,9 @@ const Explore = () => {
   )
 }
 
-const Petition = ({title, description, src, alt, signers, objective }) => {
+const Petition = ({id, title, description, src, alt, signers, objective }) => {
+  const navigate = useNavigate();
+
   return (
     <div className='explore-card'>
       <div>
@@ -28,7 +32,7 @@ const Petition = ({title, description, src, alt, signers, objective }) => {
         <h3>{title}</h3>
         <p>{description.length <= 200 ? description : description.slice(0, 200) + '...'}</p>
         <p style={{color: "#FF0A27", textAlign: "center"}}>{signers} han firmado de un objetivo de {objective} firmas.</p>
-        <button>
+        <button onClick={() => navigate(`/petition/${id}`)}>
           Ver mas
         </button>
       </div>

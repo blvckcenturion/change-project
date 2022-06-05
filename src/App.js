@@ -30,7 +30,7 @@ const App = () =>{
             <Route path="my-petitions" element={<MyPetitions />} />
             <Route path="delete-account" element={<DeleteAccount />} />
             <Route path="account-settings" element={<Settings />} />
-            <Route path="petition" element={<Petition />} />
+            <Route path="petition/:id" element={<Petition />} />
             <Route path="sign" element={<Sign />} />
             <Route path="new-petition" element={<NewPetition />} />
           </Routes>

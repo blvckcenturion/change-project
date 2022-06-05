@@ -9,7 +9,6 @@ const Settings = () => {
   const [name, setName] = useState("")
   const [lastName, setLastName] = useState("")
   const [country, setCountry] = useState("")
-  const [city, setCity] = useState("")
   const [birthdate, setBirthdate] = useState("")
 
   const handleBasicInformationChange = (e) => {
@@ -41,10 +40,6 @@ const Settings = () => {
               <div>
                 <label htmlFor="country">Country</label>
                 <input type="text" name="country" id="country" value={country} onChange={(e) => setCountry(e.target.value)} />
-              </div>
-              <div> 
-                <label htmlFor="city">City</label>
-                <input type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} />
               </div>
               <div>
                 <label htmlFor="birthdate">Birthdate</label>
