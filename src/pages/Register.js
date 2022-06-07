@@ -2,7 +2,9 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import Head from "../components/Head"
 import axios from "axios";
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
+import { navigateTo } from "../utils/SillyFunctions";
 const Register = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -11,29 +13,37 @@ const Register = () => {
   const [lastName, setLastName] = useState("")
   const [country, setCountry] = useState("")
   const [birthdate, setBirthdate] = useState("")
-
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const user = {
-      email,
-      name,
-      lastName,
-      password,
-      password_confirmation: repeatPassword,
-      country, 
-      birthdate
-    }
 
-    await axios.post(`http://localhost:8000/api/users/register`, {
-      headers: {
-        'Content-Type': 'application/json',
-      }, 
-      data: user
-    })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('name', name);
+    formData.append('lastName', lastName);
+    formData.append('password', password);
+    formData.append('password_confirmation', repeatPassword);
+    formData.append('country', country);
+    formData.append('birthDate', birthdate);
+    
+    await axios.post(`http://localhost:8000/api/users/register`, formData)
+      .then(({data}) => {
+        Swal.fire({
+          icon: "success",
+          text: data.message
+        })
+        navigateTo(window, navigate, "/login")
+      }).catch(({ response }) => {
+        console.log(response)
+        let error = "";
+        if (response.data.message.email[0] === "The email has already been taken.") {
+          error += "El email ya está registrado."
+        }
+        Swal.fire({
+          icon: "error",
+          text: error
+        })
       })
   }
 

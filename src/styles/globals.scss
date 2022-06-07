@@ -124,6 +124,21 @@ form {
     
 }
 
+.loader{ 
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    flex-direction: column;
+    h3 {
+        margin-top: 50px;
+        text-align: center;
+        color: $secondary-color;
+        font-size: 2rem;
+        letter-spacing: 5px;
+    }
+}
+
 input:-internal-autofill-selected {
     background-color: transparent;
 }
