@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Head from "../components/Head"
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import { navigateTo } from "../utils/SillyFunctions";
+import useAuth from "../hooks/useAuth";
+
 const Register = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -14,8 +16,10 @@ const Register = () => {
   const [country, setCountry] = useState("")
   const [birthdate, setBirthdate] = useState("")
   const navigate = useNavigate()
+  const { auth, login } = useAuth();
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault()
 
     const formData = new FormData();
@@ -46,6 +50,13 @@ const Register = () => {
         })
       })
   }
+
+  useEffect(() => {
+    if (auth) {
+      navigateTo(window, navigate, "/")
+    }
+  }, [auth])
+  
 
   return (
     <div className="register-page">

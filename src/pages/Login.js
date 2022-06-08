@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import Head from '../components/Head';
 import Swal from 'sweetalert2';
@@ -40,6 +40,12 @@ const Login = () => {
       })
     }
   }
+
+  useEffect(() => { 
+    if (auth) {
+      navigateTo(window, navigate, "/")
+    }
+  }, [])
 
   if (!loading) {
     return (

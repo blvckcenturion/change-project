@@ -6,12 +6,13 @@ import Loader from '../components/Loader'
 import { useEffect } from 'react'
 import { getMeApi } from '../api/user'
 import { useState } from 'react'
-import { capitalize } from '../utils/SillyFunctions'
+import { capitalize, navigateTo } from '../utils/SillyFunctions'
 const MyProfile = () => {
 
   let navigate = useNavigate();
   const { auth, logout } = useAuth();
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     if (auth) {
       (async () => {
@@ -21,25 +22,23 @@ const MyProfile = () => {
           response.data.data.created_at = new Date(response.data.data.created_at);
           setUser(response.data.data);
         } else {
-          navigate('/login')
+          navigateTo(window,navigate, '/login')
         }
       })()
     } else {
-      navigate('/login')
+      navigateTo(window,navigate, '/login')
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth])
 
   const handleLogout = () => {
     logout();
-    navigate('/')
   }
 
   if (user) {
     
     return (
       <div className='my-profile-page'>
-        
         <div className='info'>
           <Profile/>
           <div>
@@ -51,10 +50,10 @@ const MyProfile = () => {
         </div>
         <div>
           <h3>PERFIL Y PREFERENCIAS</h3>
-          <button onClick={() => navigate('/account-settings')}>
+          <button onClick={() => navigateTo(window,navigate, '/account-settings')}>
             Editar perfil
           </button>
-          <button onClick={() => navigate('/my-petitions')}>
+          <button onClick={() => navigateTo(window,navigate, '/my-petitions')}>
             Mis peticiones
           </button>
           <button onClick={handleLogout}>
