@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import Head from "../components/Head"
 import { useNavigate } from 'react-router-dom'
 
+
+
 const Explore = () => {
 
   const allPetitions = [...myPetitions, ...otherPetitions];

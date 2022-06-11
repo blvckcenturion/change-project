@@ -25,7 +25,6 @@ const Login = () => {
     const response = await loginApi(formData)
     console.log(response)
     if (response?.data?.token) {
-      
       login(response.data.token)
       Swal.fire({
         icon: "success",
