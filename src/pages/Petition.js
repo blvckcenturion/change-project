@@ -23,7 +23,6 @@ const Petition = () => {
 
   useEffect(() => {
     (async () => {
-      window.scrollTo(0, 0)
       setLoading(true)
       const response = await getSinglePetition(id);
       console.log(response.data);
@@ -124,7 +123,7 @@ const Petition = () => {
         <div className="petition-page-header">
           <h1>{petition.title}</h1>
           {auth && parseInt(auth.idUser) === petition.userId && (
-            <button>
+            <button onClick={() => navigateTo(window, navigate, `/edit-petition/${id}`)}>
               Editar peticion
             </button>
           )}

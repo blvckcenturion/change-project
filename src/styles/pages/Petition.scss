@@ -1,6 +1,9 @@
 .petition-page{
     width: 90%;
-    background-color: blue;
+    border: {
+        left : 2px solid $primary-color;
+        right : 2px solid $primary-color;
+    }
     @include md{
         width: 70%;
     }
@@ -34,7 +37,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
-        background-color: orange;
         &-img{
             width: 90%;
             height: 30vh;
@@ -42,7 +44,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: gray;
 
             @include md{
                 height: 40vh;
@@ -62,7 +63,6 @@
                 top: 2px solid $primary-color;
                 bottom: 2px solid $primary-color;
             }
-            background-color: chartreuse;
             width: 100%;
             margin: 5vh 0;
             display: flex;
@@ -141,7 +141,6 @@
     &-action{
         width: 100%;
         height: 10vh;
-        background-color: antiquewhite;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -175,7 +174,6 @@
         }
         > div:last-child{
             width:30%;
-            background-color: aquamarine;
             h4{
                 margin: 1vh;
             }
@@ -184,13 +182,10 @@
     &-comments{
         width:100%;
         min-height: 20vh;
-        background-color: lightblue;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
-        border-bottom: 2px solid $primary-color;
-        margin-bottom: 5vh;
         h2 {
             font-size: 1.5rem;
             width: 100%;
@@ -217,7 +212,6 @@
 
         &-container {
             width: 100%;
-            background-color: orange;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -226,7 +220,6 @@
         &-new{
             width: 100%;
             height: 35vh;
-            background-color: lightgreen;
             display: flex;
             flex-direction: column;
             align-items: center;

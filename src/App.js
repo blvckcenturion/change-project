@@ -18,6 +18,7 @@ import AuthContext from './context/AuthContext';
 import { useState, useEffect, useMemo } from 'react';
 import { getToken, setToken, removeToken } from './api/token';
 import jwtDecode from 'jwt-decode';
+import EditPetition from './pages/EditPetition';
 
 const App = () => {
   const [reloadUser, setreloadUser] = useState(false)
@@ -84,6 +85,7 @@ const AppContents = () => {
     <Header/>
       <div className='page-content'>
         <Routes>
+          <Route path="edit-petition/:id" element={<EditPetition/>} />
           <Route index element={<Home />} />
           <Route path="my-profile" element={<MyProfile />} />
           <Route path="explore" element={<Explore />} />
