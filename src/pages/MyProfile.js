@@ -18,7 +18,6 @@ const MyProfile = () => {
       (async () => {
         const response = await getMeApi(logout);
         if (response?.data?.data) { 
-          console.log(response.data.data)
           response.data.data.created_at = new Date(response.data.data.created_at);
           setUser(response.data.data);
         } else {

@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    > div:first-child {
+    .title {
         width: 100%;
         height: 20vh;
         @include md{
@@ -20,7 +20,7 @@
             bottom: 2px solid $primary-color;
         }
     }
-    > div:last-child {
+    .petitions {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -30,7 +30,7 @@
         }
         width: 100%;
         margin: 5vh 0;
-
+        
         img{
             width: 100%;
             padding: 10px 0;
@@ -44,6 +44,7 @@
 
 .petitions-card {
     width: 100%;
+    min-height: 65vh;
     @include lg{
         width: 45%;
     }
@@ -53,6 +54,10 @@
     justify-content: space-evenly;
     border: 2px solid $primary-color;
     border-radius: 20px;
+
+    > div{
+        min-height: 55vh;
+    }
 
     &:first-child {
         margin-bottom: 10vh;

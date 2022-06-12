@@ -1,51 +1,97 @@
 import React from 'react'
 import Head from "../components/Head"
-import { myPetitions, otherPetitions } from '../utils/dummyData';
+import { useState, useEffect } from 'react'
+import { getMeApi } from '../api/user'
+import { getMyPetitionsApi } from '../api/petition'
+import { navigateTo } from '../utils/SillyFunctions'
+import { useNavigate } from 'react-router'
+import useAuth from '../hooks/useAuth'
+import Loader from '../components/Loader'
 
 const MyPetitions = () => {
-  return (
-    <div className='my-petitions-page'>
-      <Head title={"My petitions"}/>
-      <div>
-        <h3>ALVARO DIAZ ALVAREZ</h3>
+  const [user, setUser] = useState(undefined)
+  const [myPetitions, setMyPetitions] = useState([])
+  const [petitionsSigned, setPetitionsSigned] = useState([])
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+  const { auth, logout } = useAuth()
+
+  useEffect(() => {
+    if (auth) {
+      (async () => {
+        setLoading(true)
+        const response = await getMeApi(logout)
+        if (response?.data?.data) {
+          setUser(response.data.data)
+          const petitions = await getMyPetitionsApi(logout)
+          if (petitions?.data) { 
+            setMyPetitions(petitions.data.created_petitions)
+            setPetitionsSigned(petitions.data.signed_petitions)
+            console.log(petitions.data)
+          }
+          setLoading(false)
+        } else {
+          navigateTo(window,navigate, '/login')
+        }
+      })()
+    } else {
+      navigateTo(window,navigate, '/login')
+    }
+  }, [])
+  if (!loading && user) {
+    return (
+      <div className='my-petitions-page'>
+        <Head title={"My petitions"}/>
+        <div className='title'>
+          <h3>{user.name?.toUpperCase()} {user.lastname?.toUpperCase()}</h3>
+        </div>
+        <div className='petitions'>
+          <PetitionsCard title={'Iniciadas'} petitions={myPetitions} />
+          <PetitionsCard title={'Firmadas'} petitions={petitionsSigned}/>
+        </div>
+        
       </div>
-      <div>
-        <PetitionsCard title={'Iniciadas'} petitions={myPetitions} />
-        <PetitionsCard title={'Firmadas'} petitions={otherPetitions}/>
+    )  
+  } else {
+    return (
+      <div className='my-petitions-page'>
+        <Head title={"My petitions"} />
+        <Loader/>
       </div>
-      
-    </div>
-  )
+    )
+  }
+  
 }
 
 const PetitionsCard = ({ title, petitions }) => {
-  if (petitions.length === 0) return;
   return (
     <div className="petitions-card">
-      <h3>{title}({petitions.length})</h3>
+      <h3>{title}({petitions?.length})</h3>
       <div>
-        {petitions.map((e, i) => <Petition key={i} {...e} />)}
+        {petitions && petitions.length > 0 ? petitions.map((petition, index) => <Petition key={index} {...petition?.petition} />) : <h4>No hay peticiones {title.toLowerCase()}.</h4>}
       </div>
     </div>
   )
 }
 
-const Petition = ({to, title, description, src, alt, signers, from}) => {
+const Petition = ({directedTo, title, description, imageUrl, signatureCount, userName, id}) => {
+  const navigate = useNavigate()
+
   return (
-    <div className='petition'>
+    <div className='petition' onClick={() => navigateTo(window, navigate, `/petition/${id}`)}>
       <div>
         <div>
-          <h4>Dirigida a: {to}</h4>
+          <h4>Dirigida a: {directedTo}</h4>
           <h3>{title}</h3>
           <p>{description.length <= 200 ? description : description.slice(0, 200)+ '...'}</p>
         </div>
         <div>
-          <img src={src} alt={alt} />
+          <img src={imageUrl} alt={title} />
         </div>
       </div>
       <div>
-        <h4>{from}</h4>
-        <h5>{signers} firmas</h5>
+        <h4>{userName}</h4>
+        <h5>{signatureCount} firmas</h5>
       </div>
     </div>
   )

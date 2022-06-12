@@ -74,6 +74,27 @@ export const getAllPetitions = async () => {
     return response
 }
 
+export const getMyPetitionsApi = async () => { 
+    const url = `${BASE_URL}/petition/my-petitions`
+    const token = getToken();
+    if (!token) {
+        //Usuario no loggeado
+        return null;
+    } else {
+        try {
+            const params = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const response = await axios.get(url, params)
+            return response
+        } catch (e) {
+            return e
+        }
+    }
+}
+
 export const getSinglePetition = async (id) => {
     const url = `${BASE_URL}/petition/${id}`
     const response = await axios.get(url)
