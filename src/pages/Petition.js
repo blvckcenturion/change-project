@@ -23,6 +23,7 @@ const Petition = () => {
 
   useEffect(() => {
     (async () => {
+      window.scrollTo(0, 0)
       setLoading(true)
       const response = await getSinglePetition(id);
       console.log(response.data);
@@ -52,6 +53,7 @@ const Petition = () => {
     e.preventDefault()
     if (auth) {
       (async () => {
+        window.scrollTo(0,0)
         setLoading(true)
         const response = await postSigned(id, logout);
         console.log(response)
@@ -60,10 +62,14 @@ const Petition = () => {
             {
               icon: "success",
               title: "¡Gracias por firmar!",
-              text: "Has firmado la petición"
+              text: "Has firmado la petición",
+              confirmButtonText: "Ok"
             }
-          )
-          setLoading(false)
+          ).then((result) => {
+            if (result.value) {
+              window.location.reload()
+            }
+          })
         }
       })()
     }
@@ -76,18 +82,26 @@ const Petition = () => {
     if (auth) {
       if (comment.length > 0) { 
         (async () => {
+          window.scrollTo(0, 0)
           setLoading(true)
-          const response = await postComment(id, comment, logout);
+          const formData = new FormData();
+          formData.append('comment', comment);
+          const response = await postComment(id, formData, logout);
           console.log(response)
           if (response.data.success) {
             Swal.fire(
               {
                 icon: "success",
                 title: "¡Gracias por comentar!",
-                text: "Has comentado la petición"
+                text: "Has comentado la petición",
+                confirmButtonText: "Ok"
               }
-            )
-            setLoading(false)
+            ).then((result) => {
+              if (result.value) {
+                window.location.reload()
+              }
+            })
+            
           }
         })()
       } else {
@@ -169,10 +183,10 @@ const Petition = () => {
         <div className="petition-page-comments">
           <h2>Comentarios</h2>
           <div className="petition-page-comments-container">
-            {/* {petition.comments.length === 0 && (
+            {petition.comments && petition.comments.length === 0 && (
               <h4>Esta peticion no tiene comentarios.</h4>
-            )} */}
-            <PetitionComment/>
+            )}
+            {petition.comments && petition.comments.length > 0 && petition.comments.map((comment, i) => <PetitionComment key={i} {...comment}/>)}
           </div>
           {auth && <div className="petition-page-comments-new">
             <h2>Deja un comentario</h2>
@@ -194,15 +208,20 @@ const Petition = () => {
   }
 }
 
-const PetitionComment = () => {
+const PetitionComment = ({ comment, created_at, userName }) => {
+  
+  const date = new Date(created_at)
+  const dateString = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
+
   return (
     <div className="comment">
       <div className="comment-user">
-        <h4>Nombre</h4>
-        <h4>Fecha</h4>
+        <h4>{userName}</h4>
+        <h4>{dateString}</h4>
       </div>
       <div className="comment-content">
-        <p>Comentario</p>
+        <p>{comment}
+        </p>
       </div>
     </div>
   )

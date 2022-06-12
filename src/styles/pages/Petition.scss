@@ -203,7 +203,7 @@
                 font-size: 2rem;
             }
         }
-        h4{
+        > h4{
             font-size: 1.2rem;
             text-align: center;
             @include md{
@@ -218,6 +218,10 @@
         &-container {
             width: 100%;
             background-color: orange;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
         }
         &-new{
             width: 100%;
