@@ -35,7 +35,8 @@ const Register = () => {
       .then(({data}) => {
         Swal.fire({
           icon: "success",
-          text: data.message
+          title: "¡Registro Exitoso!",
+          text: "Te has registrado a change project."
         })
         navigateTo(window, navigate, "/login")
       }).catch(({ response }) => {

@@ -6,12 +6,13 @@ import { navigateTo } from "../utils/SillyFunctions"
 import { useNavigate } from "react-router"
 import Loader from '../components/Loader'
 import { postPetitionApi } from "../api/petition"
-
+import Swal from "sweetalert2"
 const NewPetition = () => {
   const navigate = useNavigate()
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [directedTo, setDirectedTo] = useState("")
+  const [image, setImage] = useState(null)
   const [goal, setGoal] = useState("")
   const { auth, logout } = useAuth()
   const [loading, setLoading] = useState(false)
@@ -24,14 +25,30 @@ const NewPetition = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
+    // setLoading(true)
     const formData = new FormData()
     formData.append("title", title)
     formData.append("description", description)
     formData.append("directedTo", directedTo)
     formData.append("goal", goal)
-    formData.append("imageUrl", "https://assets.change.org/photos/0/oq/xf/IuoqXFZuIxaOKSL-800x450-noPad.jpg?1596722986")
+    formData.append("image", image)
+    console.log(formData)
     const response = await postPetitionApi(formData, logout)
+    if (response.data.success) {
+      Swal.fire(
+        {
+          icon: "success",
+          title: "Creacion Exitosa!",
+          text: "La peticion ha sido creada.",
+          confirmButtonText: "Ok"
+        }
+      ).then((result) => {
+        if (result.value) {
+          navigateTo(window, navigate, `/my-profile`)
+        }
+      })
+    }
+    // console.log(response)
   }
 
   if (!loading) {
@@ -57,6 +74,10 @@ const NewPetition = () => {
           <div>
             <label htmlFor="goal">Objetivo de firmas</label>
             <input type="number" name="goal" id="goal" value={goal} onChange={(e) => setGoal(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="image">Imagen de la peticion</label>
+            <input type="file" name="image" id="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
           </div>
           <button type="submit">
             Iniciar peticion

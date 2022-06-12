@@ -24,6 +24,7 @@ const MyPetitions = () => {
         if (response?.data?.data) {
           setUser(response.data.data)
           const petitions = await getMyPetitionsApi(logout)
+          console.log(petitions)
           if (petitions?.data) { 
             setMyPetitions(petitions.data.created_petitions)
             setPetitionsSigned(petitions.data.signed_petitions)
@@ -64,11 +65,12 @@ const MyPetitions = () => {
 }
 
 const PetitionsCard = ({ title, petitions }) => {
+  console.log(petitions)
   return (
     <div className="petitions-card">
       <h3>{title}({petitions?.length})</h3>
       <div>
-        {petitions && petitions.length > 0 ? petitions.map((petition, index) => <Petition key={index} {...petition?.petition} />) : <h4>No hay peticiones {title.toLowerCase()}.</h4>}
+        {petitions && petitions.length > 0 ? petitions.map((petition, index) => <Petition key={index} {...petition} />) : <h4>No hay peticiones {title.toLowerCase()}.</h4>}
       </div>
     </div>
   )
@@ -83,7 +85,7 @@ const Petition = ({directedTo, title, description, imageUrl, signatureCount, use
         <div>
           <h4>Dirigida a: {directedTo}</h4>
           <h3>{title}</h3>
-          <p>{description.length <= 200 ? description : description.slice(0, 200)+ '...'}</p>
+          {/* <p>{description && description.length <= 200 ? description : description.slice(0, 200)+ '...'}</p> */}
         </div>
         <div>
           <img src={imageUrl} alt={title} />

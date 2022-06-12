@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { navigateTo } from "../utils/SillyFunctions"
 import { useNavigate } from "react-router"
 import Loader from '../components/Loader'
-import { putPetitionApi, deletePetitionApi} from "../api/petition"
+import { putPetitionApi} from "../api/petition"
 import { getSinglePetition } from "../api/petition";
 import { useParams } from "react-router"
 import Swal from "sweetalert2"
@@ -17,6 +17,7 @@ const EditPetition = () => {
   const [directedTo, setDirectedTo] = useState("")
   const [goal, setGoal] = useState("")
   const { auth, logout } = useAuth()
+  const [image, setImage] = useState(null)
   const [loading, setLoading] = useState(false)
   const { id } = useParams();
 
@@ -48,8 +49,7 @@ const EditPetition = () => {
       title,
       description,
       directedTo,
-      goal,
-      imageUrl: "https://assets.change.org/photos/0/oq/xf/IuoqXFZuIxaOKSL-800x450-noPad.jpg?1596722986"
+      goal
     }
     const response = await putPetitionApi(id, data, logout)
     if (response.data.success) {
