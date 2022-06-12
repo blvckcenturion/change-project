@@ -23,3 +23,16 @@ export const postPetitionApi = async (data, logout) => {
         }
     }
 }
+
+export const getAllPetitions = async () => { 
+    const url = `${BASE_URL}/petition`
+    const response = await axios.get(url)
+    return response
+}
+
+export const getSinglePetition = async (id) => {
+    const url = `${BASE_URL}/petition/${id}`
+    const response = await axios.get(url)
+    return response
+}
+

@@ -47,6 +47,27 @@ button {
     }
 }
 
+textarea {
+    width: 80%;
+    height: 20vh;
+    border: 2px solid $primary-color;
+    color: $secondary-color;
+    background-color: transparent;
+    resize: none;
+    &:focus{
+        transition: 0.5s;
+        outline: none;
+        border: 2px solid $secondary-color;
+        border-radius: 10px;
+    }
+    margin: {
+        top: 1rem;
+    }
+    @include lg{
+        width: 60%;
+    }
+}
+
 form {
     width: 100%;
     display: flex;
@@ -99,26 +120,7 @@ form {
             color: $secondary-color;
         }
 
-        textarea {
-            width: 80%;
-            height: 20vh;
-            border: 2px solid $primary-color;
-            color: $secondary-color;
-            background-color: transparent;
-            resize: none;
-            &:focus{
-                transition: 0.5s;
-                outline: none;
-                border: 2px solid $secondary-color;
-                border-radius: 10px;
-            }
-            margin: {
-                top: 1rem;
-            }
-            @include lg{
-                width: 60%;
-            }
-        }
+        
         
     }
     
